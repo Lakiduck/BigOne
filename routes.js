@@ -16,7 +16,11 @@ module.exports = function(app, urlencodedParser, auth) {
   });
 
   app.get('/createaccount', function(req, res){
-    res.render('createaccount');
+    if(req.user){
+      res.send('Authenticated');
+    } else{
+      res.render('createaccount');
+    }
   });
 
   app.post('/createaccount', urlencodedParser, function(req, res){
@@ -41,4 +45,7 @@ module.exports = function(app, urlencodedParser, auth) {
       res.send('Authenticated');
     });
 
-}
+  app.get('/home', auth.loggedin, function(req, res){
+      res.send("Home");
+  });
+};
