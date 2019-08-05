@@ -3,9 +3,9 @@
 //Load User Model to be used in post requests
 const user = require('./models/user');
 
-const UserModel = user.user;
+const User = user.user;
 
-module.exports = function(app, urlencodedParser) {
+module.exports = function(app, urlencodedParser, auth) {
 
   app.get('/login', function(req, res){
     res.render('login');
@@ -18,7 +18,7 @@ module.exports = function(app, urlencodedParser) {
   app.post('/createaccount', urlencodedParser, function(req, res){
     console.log(req.body);
     if(req.body.password === req.body.confirm){
-      UserModel(req.body).save(function(err, data){
+      User(req.body).save(function(err, data){
         if(err){
           throw err;
         } else {
@@ -30,8 +30,11 @@ module.exports = function(app, urlencodedParser) {
     }
   });
 
-  app.post('/login', urlencodedParser, function(req, res){
-    //code here
-  });
+  app.post('/login', urlencodedParser, auth.authenticate('local', {
+      failureRedirect: '/login'
+    }),
+    function(req, res){
+      res.send('Authenticated');
+    });
 
 }

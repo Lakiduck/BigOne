@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo')(session);
 const routes = require('./routes');
 const tests = require('./tests');
 const user = require('./models/user');
+const auth = require('./auth');
 
 const app = express();
 
@@ -28,8 +29,11 @@ app.use(session({
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+//Pass app into auth.js
+auth.app(app);
+
 //Pass app into routes.js
-routes(app, urlencodedParser);
+routes(app, urlencodedParser, auth.passport);
 
 //pass app into tests.js
 tests(app);
