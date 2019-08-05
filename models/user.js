@@ -4,7 +4,7 @@ const dbConfig = require('../dbConfig');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-mongoose.connect(dbConfig, {useNewUrlParser: true});
+const connection = mongoose.createConnection(dbConfig, {useNewUrlParser: true});
 
 const UserSchema = new Schema({
   name: String,
@@ -13,4 +13,7 @@ const UserSchema = new Schema({
 });
 
 //Export the User Model for use in other files
-module.exports = mongoose.model('User', UserSchema);
+module.exports = {
+  connection: connection,
+  user: connection.model('User', UserSchema)
+}

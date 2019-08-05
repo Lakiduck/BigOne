@@ -1,7 +1,9 @@
 //Establish Routes
 
 //Load User Model to be used in post requests
-const UserModel = require('./models/user');
+const user = require('./models/user');
+
+const UserModel = user.user;
 
 module.exports = function(app, urlencodedParser) {
 
