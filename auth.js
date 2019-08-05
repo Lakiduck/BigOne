@@ -39,3 +39,11 @@ passport.use(new LocalStrategy({
 ));
 
 module.exports.passport = passport;
+
+module.exports.login = function(req, res, next){
+  if(req.user){
+    next();
+  } else{
+    res.render('login');
+  }
+};

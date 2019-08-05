@@ -8,11 +8,15 @@ const User = user.user;
 module.exports = function(app, urlencodedParser, auth) {
 
   app.get('/login', function(req, res){
-    res.render('login');
+    if(req.user){
+        res.send("Authenticated");
+    } else{
+      res.render('login');
+    }
   });
 
   app.get('/createaccount', function(req, res){
-    res.render('createaccount')
+    res.render('createaccount');
   });
 
   app.post('/createaccount', urlencodedParser, function(req, res){
@@ -30,7 +34,7 @@ module.exports = function(app, urlencodedParser, auth) {
     }
   });
 
-  app.post('/login', urlencodedParser, auth.authenticate('local', {
+  app.post('/login', urlencodedParser, auth.passport.authenticate('local', {
       failureRedirect: '/login'
     }),
     function(req, res){

@@ -33,7 +33,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 auth.app(app);
 
 //Pass app into routes.js
-routes(app, urlencodedParser, auth.passport);
+routes(app, urlencodedParser, auth);
 
 //pass app into tests.js
 tests(app);
