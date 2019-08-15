@@ -9,6 +9,7 @@ const tests = require('./tests');
 const user = require('./models/user');
 const auth = require('./auth');
 
+
 const app = express();
 
 //Set template engine to be used

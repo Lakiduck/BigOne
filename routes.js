@@ -45,7 +45,7 @@ module.exports = function(app, urlencodedParser, auth) {
       res.send('Authenticated');
     });
 
-  app.get('/home', auth.loggedin, function(req, res){
+  app.get('/', auth.loggedin, function(req, res){
       res.send("Home");
   });
 };
