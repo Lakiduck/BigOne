@@ -25,17 +25,21 @@ module.exports = function(app, urlencodedParser, auth) {
 
   app.post('/createaccount', urlencodedParser, function(req, res){
     console.log(req.body);
-    if(req.body.password === req.body.confirm){
-      User(req.body).save(function(err, data){
-        if(err){
-          throw err;
-        } else {
-        res.render('accountcreated', {name: req.body.name});
-        }
-      });
-    } else {
-        res.send('Password\'s didn\'t match');
-    }
+    User.findOne({email: req.body.email}, function(err, user){
+      if(user){
+        res.send('User already exists');
+      } else if(req.body.password === req.body.confirm){
+                User(req.body).save(function(err, data){
+                  if(err){
+                    throw err;
+                  } else {
+                    res.render('accountcreated', {name: req.body.name});
+                  }
+                });
+              } else {
+                res.send('Password\'s didn\'t match');
+              }
+    });
   });
 
   app.post('/login', urlencodedParser, auth.passport.authenticate('local', {
