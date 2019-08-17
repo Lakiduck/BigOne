@@ -29,16 +29,16 @@ module.exports = function(app, urlencodedParser, auth) {
       if(user){
         res.send('User already exists');
       } else if(req.body.password === req.body.confirm){
-                User(req.body).save(function(err, data){
-                  if(err){
-                    throw err;
-                  } else {
-                    res.render('accountcreated', {name: req.body.name});
-                  }
-                });
-              } else {
-                res.send('Password\'s didn\'t match');
-              }
+        User(req.body).save(function(err, data){
+          if(err){
+            throw err;
+          } else {
+            res.render('accountcreated', {name: req.body.name});
+          }
+        });
+      } else {
+        res.send('Password\'s didn\'t match');
+      }
     });
   });
 
