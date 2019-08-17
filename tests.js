@@ -14,4 +14,9 @@ module.exports = function(app){
       res.end("First View");
     }
   });
+
+  //testing accountcreatedlayout
+  app.get('/congratulations', function(req, res){
+      res.render('accountcreated');
+  });
 };

@@ -4,11 +4,10 @@
   grid-auto-rows: minmax(50px, auto);
   margin: 0 auto;
   grid-template-areas:
-  ". . ."
-  ". title ."
-  ". spiel ."
-  ". form ."
-  ". a .";
+    ". . ."
+    ". title ."
+    ". form ."
+    ". a .";
 }
 
 h1{
@@ -16,21 +15,15 @@ h1{
   justify-self: center;
 }
 
-h4{
-  grid-area: spiel;
-  justify-self: center;
-}
-
 form{
-  border: solid black 1px;
-  padding: 10%;
-  /*grid-column: 2/3;*/
-  justify-self: center;
-  align-self: center;
-  grid-area: form;
+   border: solid black 1px;
+   padding: 10% 20%;
+   grid-area: form;
+   justify-self: center;
+   align-self: center;
 }
 
-form > * {
+form > *{
   display: block;
   margin-top: 10%;
   margin-bottom: 10%;
@@ -39,7 +32,6 @@ form > * {
 }
 
 a{
-  /*grid-column: 2/3;*/
+  grid-area: a;
   justify-self: center;
-  grid-area: a
 }

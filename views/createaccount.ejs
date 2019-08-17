@@ -1,14 +1,19 @@
 <html>
   <head>
     <title>WalgsChat - Create Account</title>
+    <link rel="stylesheet" type="text/css" href="./css/createaccount.css" />
   </head>
   <body>
-    <form method="post" action="/createaccount">
-      <input type="text" name="name" placeholder="Enter Your Name Here" />
-      <input type="email" name="email" placeholder="Enter Your Email Here" />
-      <input type="password" name="password" placeholder="Enter Your Password Here" />
-      <input type="password" name="confirm" placeholder="Confirm Your Password Here" />
-      <input type="submit" value="Submit"/>
-    </form>
+    <div id="grid">
+      <h1>WalgsChat - Create Account</h1>
+      <form method="post" action="/createaccount">
+        <input type="text" name="name" placeholder="Enter Your Name" />
+        <input type="email" name="email" placeholder="Enter Your Email" />
+        <input type="password" name="password" placeholder="Enter Your Password" />
+        <input type="password" name="confirm" placeholder="Confirm Your Password" />
+        <input type="submit" value="Submit"/>
+      </form>
+      <a href="./login">Already have an account?...Login Here</a>
+    </div>
   </body>
 </html>

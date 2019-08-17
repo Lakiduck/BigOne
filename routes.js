@@ -30,7 +30,7 @@ module.exports = function(app, urlencodedParser, auth) {
         if(err){
           throw err;
         } else {
-        res.send('Success');
+        res.render('accountcreated', {name: req.body.name});
         }
       });
     } else {
