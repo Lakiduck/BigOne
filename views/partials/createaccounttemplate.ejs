@@ -1,0 +1,10 @@
+<h1>WalgsChat - Create Account</h1>
+<p id='prompt'><%= prompt %></p>
+<form method="post" action="/createaccount">
+  <input type="text" name="name" placeholder="Enter Your Name" />
+  <input type="email" name="email" placeholder="Enter Your Email" />
+  <input type="password" name="password" placeholder="Enter Your Password" />
+  <input type="password" name="confirm" placeholder="Confirm Your Password" />
+  <input type="submit" value="Submit"/>
+</form>
+<a href="./login">Already have an account?...Login Here</a>

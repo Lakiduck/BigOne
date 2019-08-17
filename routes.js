@@ -27,7 +27,8 @@ module.exports = function(app, urlencodedParser, auth) {
     console.log(req.body);
     User.findOne({email: req.body.email}, function(err, user){
       if(user){
-        res.send('User already exists');
+        //res.send('User already exists');
+        res.render('userexists', {prompt: "User already exists"})
       } else if(req.body.password === req.body.confirm){
         User(req.body).save(function(err, data){
           if(err){
@@ -37,7 +38,8 @@ module.exports = function(app, urlencodedParser, auth) {
           }
         });
       } else {
-        res.send('Password\'s didn\'t match');
+        //res.send('Password\'s didn\'t match');
+        res.render('passwordnomatch', {prompt: "Passwords do not match"})
       }
     });
   });
