@@ -44,6 +44,6 @@ module.exports.loggedin = function(req, res, next){
   if(req.user){
     next();
   } else{
-    res.render('login');
+    res.redirect('login');
   }
 };

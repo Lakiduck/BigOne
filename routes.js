@@ -48,7 +48,7 @@ module.exports = function(app, urlencodedParser, auth) {
       failureRedirect: '/incorrectpassword'
     }),
     function(req, res){
-      res.send('Authenticated');
+      res.redirect('chat');
     });
 
     app.get('/incorrectpassword', function(req, res){
@@ -56,6 +56,10 @@ module.exports = function(app, urlencodedParser, auth) {
     });
 
   app.get('/', auth.loggedin, function(req, res){
-      res.send("Home");
+      res.redirect("chat");
+  });
+
+  app.get('/chat', auth.loggedin, function(req, res){
+    res.render('chat');
   });
 };

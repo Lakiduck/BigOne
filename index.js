@@ -8,9 +8,16 @@ const routes = require('./routes');
 const tests = require('./tests');
 const user = require('./models/user');
 const auth = require('./auth');
+const chat = require('./chat');
 
 
 const app = express();
+
+//need to pass the http server object into new instance of socket.io
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
+chat(io);
 
 //Set template engine to be used
 app.set('view engine', 'ejs');
@@ -40,5 +47,8 @@ routes(app, urlencodedParser, auth);
 tests(app);
 
 //listen to any requests on port 3000
-app.listen(3000);
-console.log("Listening to port 3000")
+/*app.listen(3000);
+console.log("Listening to port 3000")*/
+http.listen(3000, function(){
+  console.log('listening on port 3000');
+});
