@@ -45,10 +45,14 @@ module.exports = function(app, urlencodedParser, auth) {
   });
 
   app.post('/login', urlencodedParser, auth.passport.authenticate('local', {
-      failureRedirect: '/login'
+      failureRedirect: '/incorrectpassword'
     }),
     function(req, res){
       res.send('Authenticated');
+    });
+
+    app.get('/incorrectpassword', function(req, res){
+      res.render('incorrectpassword', {prompt: "Incorrect Username or Password"})
     });
 
   app.get('/', auth.loggedin, function(req, res){
