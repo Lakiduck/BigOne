@@ -49,6 +49,6 @@ tests(app);
 //listen to any requests on port 3000
 /*app.listen(3000);
 console.log("Listening to port 3000")*/
-http.listen(3000, function(){
+http.listen(process.env.PORT || 3000, function(){
   console.log('listening on port 3000');
 });
