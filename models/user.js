@@ -9,7 +9,8 @@ const connection = mongoose.createConnection(dbConfig, {useNewUrlParser: true});
 const UserSchema = new Schema({
   name: String,
   email: String,
-  password: String,
+  hashedPassword: String,
+  salt: String
 });
 
 //Export the User Model for use in other files

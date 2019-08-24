@@ -2,6 +2,7 @@
 
 //Load User Model to be used in post requests
 const user = require('./models/user');
+const hash = require('./hash');
 
 const User = user.user;
 
@@ -24,12 +25,19 @@ module.exports = function(app, urlencodedParser, auth) {
   });
 
   app.post('/createaccount', urlencodedParser, function(req, res){
-    console.log(req.body);
+
     User.findOne({email: req.body.email}, function(err, user){
       if(user){
         //res.send('User already exists');
         res.render('userexists', {prompt: "User already exists"})
       } else if(req.body.password === req.body.confirm){
+        const hp = hash.saltHashPassword(req.body.password);
+
+        req.body.hashedPassword = hp.hashedPassword;
+        req.body.salt = hp.salt;
+        delete req.body.password;
+        delete req.body.confirm;
+        
         User(req.body).save(function(err, data){
           if(err){
             throw err;

@@ -3,6 +3,8 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('./models/user').user;
 
+const hash = require('./hash');
+
 module.exports.app = function(app){
   app.use(passport.initialize());
   app.use(passport.session());
@@ -24,13 +26,14 @@ passport.use(new LocalStrategy({
 },
   function(username, password, done){
     User.findOne({email: username}, function(err, user){
+      const hashedPWandSalt = hash.hashFunc(password, user.salt);
       if(err){
         return done(err);
       }
       if(!user){
         return done(null, false);
       }
-      if(user.password !== password){
+      if(user.hashedPassword !== hashedPWandSalt.hashedPassword){
         return done(null, false);
       }
       return done(null, user);
